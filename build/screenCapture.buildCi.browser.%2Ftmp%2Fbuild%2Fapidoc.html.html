@@ -1,0 +1,181 @@
+<html><head></head><body><div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a href="https://github.com/pdupavillon/express-recaptcha">express-recaptcha (v2.1.0)</a>
+</h1>
+<h4>Google recaptcha middleware for express</h4>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.express-recaptcha">module express-recaptcha</a><ol>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">express-recaptcha.</span>api</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">express-recaptcha.</span>middleware</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.express-recaptcha.middleware">module express-recaptcha.middleware</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.express-recaptcha.middleware.render">
+            function <span class="apidocSignatureSpan">express-recaptcha.middleware.</span>render
+            <span class="apidocSignatureSpan">(req, res, next)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.express-recaptcha.middleware.verify">
+            function <span class="apidocSignatureSpan">express-recaptcha.middleware.</span>verify
+            <span class="apidocSignatureSpan">(req, res, next)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.express-recaptcha" id="apidoc.module.express-recaptcha">module express-recaptcha</a></h1>
+
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.express-recaptcha.middleware" id="apidoc.module.express-recaptcha.middleware">module express-recaptcha.middleware</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.express-recaptcha.middleware.render" id="apidoc.element.express-recaptcha.middleware.render">
+        function <span class="apidocSignatureSpan">express-recaptcha.middleware.</span>render
+        <span class="apidocSignatureSpan">(req, res, next)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">render = function (req, res, next){
+  req.recaptcha = self.render();
+  next();
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+recaptcha.init('SITE_KEY', 'SECRET_KEY');
+
+app.use(express.static(pub));
+app.set('views', __dirname + '/views');
+app.set('view engine', 'jade');
+
+app.get('/', recaptcha.middleware.render, function(req, res){
+  res.<span class="apidocCodeKeywordSpan">render</span>('login', { captcha:req.recaptcha });
+});
+
+app.post('/', recaptcha.middleware.verify, function(req, res){
+if (!req.recaptcha.error)
+    // success code
+else
+    // error code
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.express-recaptcha.middleware.verify" id="apidoc.element.express-recaptcha.middleware.verify">
+        function <span class="apidocSignatureSpan">express-recaptcha.middleware.</span>verify
+        <span class="apidocSignatureSpan">(req, res, next)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">verify = function (req, res, next){
+  self.verify(req,function(error){
+    req.recaptcha = {error:error};
+    next();
+  });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+app.set('view engine', 'jade');
+
+app.get('/', function(req, res){
+  res.render('login', { captcha:recaptcha.render() });
+});
+
+app.post('/', function(req, res){
+    recaptcha.<span class="apidocCodeKeywordSpan">verify</span>(req, function(error){
+        if(!error)
+            //success code
+        else
+            //error code
+    }
+});
+```
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
+</body></html>
